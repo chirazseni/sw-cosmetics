@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Détails Produit | Amina Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .product-container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .product-image-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(248, 168, 200, 0.2);
+        }
+
+        .gallery-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-images img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-images img:hover {
+            border-color: #F8A8C8;
+            transform: scale(1.05);
+        }
+
+        .product-details-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #D4769F;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .price-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .original-price-large {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .price-large {
+            font-size: 1.8rem;
+            color: #F8A8C8;
+            font-weight: 700;
+        }
+
+        .discount-percentage {
+            background: linear-gradient(135deg, #F8A8C8 0%, #D4769F 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .description {
+            color: #2C2C2C;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .product-options {
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group label {
+            display: block;
+            font-weight: 600;
+            color: #D4769F;
+            margin-bottom: 10px;
+        }
+
+        .option-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #F8A8C8;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-group select:hover,
+        .option-group select:focus {
+            border-color: #D4769F;
+            outline: none;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .quantity-selector button {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #F8A8C8;
+            background: white;
+            color: #F8A8C8;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .quantity-selector button:hover {
+            background: #F8A8C8;
+            color: white;
+        }
+
+        .quantity-selector input {
+            width: 60px;
+            text-align: center;
+            border: 2px solid #F8A8C8;
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .sold-out-large {
+            display: none;
+            background: #dc3545;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sold-out-large.show {
+            display: block;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #F8A8C8 0%, #D4769F 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(248, 168, 200, 0.3);
+        }
+
+        .add-to-cart-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: #D4769F;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #F8A8C8;
+        }
+
+        @media (max-width: 768px) {
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin: 30px auto;
+            }
+
+            .main-image {
+                height: 400px;
+            }
+
+            .product-details-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .gallery-images {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Amina Collection Logo" style="height: 50px;">
+        </div>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="index.html#best-sellers" onclick="closeMenu()">BEST SELLERS</a>
+            <a href="index.html#categories" onclick="closeMenu()">CATÉGORIES</a>
+            <a href="index.html#contact" onclick="closeMenu()">CONTACT</a>
+            <a href="cart.html" style="font-weight:bold; color: #F8A8C8;">PANIER</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-container">
+            <div class="product-image-section">
+                <picture>
+                    <source id="main-source-webp" type="image/webp">
+                    <img id="main-image" src="" alt="Produit" class="main-image">
+                </picture>
+                <div class="gallery-images" id="gallery"></div>
+            </div>
+
+            <div class="product-details-section">
+                <a href="index.html" class="back-link">← Retour</a>
+                <h1 id="product-name"></h1>
+                
+                <div class="price-display" id="price-display"></div>
+
+                <div id="sold-out-msg" class="sold-out-large"></div>
+
+                <p class="description" id="product-description"></p>
+
+                <div class="product-options">
+                    <div class="option-group">
+                        <label for="size-select">Taille :</label>
+                        <select id="size-select">
+                            <option value="">Sélectionnez une taille</option>
+                        </select>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="color-select">Couleur :</label>
+                        <select id="color-select">
+                            <option value="">Sélectionnez une couleur</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="quantity-selector">
+                    <button onclick="decrementQty()">−</button>
+                    <input type="number" id="quantity" value="1" min="1" readonly>
+                    <button onclick="incrementQty()">+</button>
+                </div>
+
+                <button id="add-btn" class="add-to-cart-btn" onclick="addToCart()">Ajouter au Panier</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-main-content">
+            <h3>Amina Collection</h3>
+            <p>Rejoignez notre communauté sur les réseaux sociaux pour ne rien rater de nos nouveautés.</p>
+            
+            <div class="social-networks-container">
+                <a href="" target="_blank" class="social-btn">Instagram</a>
+                <a href="" target="_blank" class="social-btn">TikTok</a>
+                <a href="" target="_blank" class="social-btn">Facebook</a>
+            </div>
+        </div>
+        
+        <div class="footer-copyrights-bar">
+            <p>&copy; 2026 Amina Collection. Tous droits réservés. Conçu et développé par <strong>Chiraz Senni</strong>.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://aminacollection-api.onrender.com';
+        let currentProduct = null;
+
+        async function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+
+            try {
+                const res = await fetch(`${API_URL}/products/${id}`);
+                if (!res.ok) throw new Error('Product not found');
+                
+                currentProduct = await res.json();
+                displayProduct();
+            } catch (error) {
+                console.error('Erreur:', error);
+                document.querySelector('.product-container').innerHTML = '<p>Produit non trouvé</p>';
+            }
+        }
+
+        function displayProduct() {
+            const p = currentProduct;
+
+            // Nom
+            document.getElementById('product-name').textContent = p.name;
+
+            // Description
+            document.getElementById('product-description').textContent = p.description;
+
+            // Image principale
+            const mainImg = document.getElementById('main-image');
+            const mainSource = document.getElementById('main-source-webp');
+            mainImg.src = p.image;
+            mainSource.srcset = p.image.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+
+            // Prix avec réduction
+            const priceDisplay = document.getElementById('price-display');
+            const hasDiscount = p.discountPercentage > 0;
+            const displayPrice = hasDiscount ? Math.round(p.price * (1 - p.discountPercentage / 100)) : p.price;
+
+            if (hasDiscount) {
+                priceDisplay.innerHTML = `
+                    <span class="original-price-large">${p.price} DA</span>
+                    <span class="price-large">${displayPrice} DA</span>
+                    <span class="discount-percentage">-${p.discountPercentage}%</span>
+                `;
+            } else {
+                priceDisplay.innerHTML = `<span class="price-large">${p.price} DA</span>`;
+            }
+
+            // Sold Out
+            const soldOutMsg = document.getElementById('sold-out-msg');
+            const addBtn = document.getElementById('add-btn');
+            
+            if (p.isSoldOut) {
+                soldOutMsg.textContent = '🚫 CE PRODUIT EST INDISPONIBLE';
+                soldOutMsg.classList.add('show');
+                addBtn.disabled = true;
+                addBtn.textContent = 'Indisponible';
+            } else {
+                addBtn.disabled = false;
+                addBtn.textContent = 'Ajouter au Panier';
+            }
+
+            // Sizes
+            const sizeSelect = document.getElementById('size-select');
+            sizeSelect.innerHTML = '<option value="">Sélectionnez une taille</option>';
+            if (p.sizes && p.sizes.length > 0) {
+                p.sizes.forEach(size => {
+                    if (size.trim()) {
+                        const option = document.createElement('option');
+                        option.value = size.trim();
+                        option.textContent = size.trim();
+                        sizeSelect.appendChild(option);
+                    }
+                });
+            }
+
+            // Colors
+            const colorSelect = document.getElementById('color-select');
+            colorSelect.innerHTML = '<option value="">Sélectionnez une couleur</option>';
+            if (p.colors && p.colors.length > 0) {
+                p.colors.forEach(color => {
+                    if (color.trim()) {
+                        const option = document.createElement('option');
+                        option.value = color.trim();
+                        option.textContent = color.trim();
+                        colorSelect.appendChild(option);
+                    }
+                });
+            }
+
+            // Gallery
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            if (p.gallery && p.gallery.length > 0) {
+                p.gallery.forEach(img => {
+                    const picElement = document.createElement('picture');
+                    
+                    const source = document.createElement('source');
+                    source.srcset = img.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+                    source.type = 'image/webp';
+                    
+                    const imgElement = document.createElement('img');
+                    imgElement.src = img;
+                    imgElement.loading = 'lazy';
+                    
+                    imgElement.onclick = () => {
+                        document.getElementById('main-image').src = img;
+                        document.getElementById('main-source-webp').srcset = img.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+                    };
+                    
+                    picElement.appendChild(source);
+                    picElement.appendChild(imgElement);
+                    gallery.appendChild(picElement);
+                });
+            }
+        }
+
+        function incrementQty() {
+            const qty = document.getElementById('quantity');
+            qty.value = parseInt(qty.value) + 1;
+        }
+
+        function decrementQty() {
+            const qty = document.getElementById('quantity');
+            if (parseInt(qty.value) > 1) {
+                qty.value = parseInt(qty.value) - 1;
+            }
+        }
+
+        function addToCart() {
+            if (currentProduct.isSoldOut) {
+                alert('Ce produit est indisponible!');
+                return;
+            }
+
+            const size = document.getElementById('size-select').value;
+            const color = document.getElementById('color-select').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+
+            if (!size || !color) {
+                alert('Veuillez sélectionner une taille et une couleur');
+                return;
+            }
+
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            
+            // Calculer le prix final avec réduction
+            const finalPrice = currentProduct.discountPercentage > 0 
+                ? Math.round(currentProduct.price * (1 - currentProduct.discountPercentage / 100))
+                : currentProduct.price;
+
+            const cartItem = {
+                _id: currentProduct._id,
+                name: currentProduct.name,
+                price: finalPrice,
+                originalPrice: currentProduct.price,
+                discountPercentage: currentProduct.discountPercentage,
+                image: currentProduct.image,
+                size: size,
+                color: color,
+                qty: quantity
+            };
+
+            const existing = cart.find(item => 
+                item._id === currentProduct._id && 
+                item.size === size && 
+                item.color === color
+            );
+            
+            if (existing) {
+                existing.qty += quantity;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Produit ajouté au panier!');
+            window.location.href = 'cart.html';
+        }
+
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        loadProduct();
+    </script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Finaliser la Commande | Amina Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .checkout-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .checkout-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #D4769F;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .checkout-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .checkout-form {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #D4769F;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F8A8C8;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2C2C2C;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px;
+            border: 2px solid #F8A8C8;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #D4769F;
+            box-shadow: 0 0 0 3px rgba(248, 168, 200, 0.1);
+        }
+
+        .form-group input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .order-summary {
+            background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 100%);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(248, 168, 200, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .order-summary h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #D4769F;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            color: #2C2C2C;
+        }
+
+        .summary-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+
+        .summary-item-details {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .summary-item-details p {
+            margin: 2px 0;
+            color: #666;
+        }
+
+        .summary-total {
+            border-top: 2px solid #F8A8C8;
+            padding-top: 15px;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #D4769F;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #F8A8C8 0%, #D4769F 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 25px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(248, 168, 200, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .summary-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #F8A8C8;
+        }
+
+        .total-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #D4769F;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: relative;
+                top: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Amina Collection Logo" style="height: 50px;">
+        </div>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="index.html#best-sellers" onclick="closeMenu()">BEST SELLERS</a>
+            <a href="index.html#categories" onclick="closeMenu()">CATÉGORIES</a>
+            <a href="index.html#contact" onclick="closeMenu()">CONTACT</a>
+            <a href="cart.html" style="font-weight:bold; color: #F8A8C8;">PANIER</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <div class="checkout-header">
+                <h1>✓ Finaliser la Commande</h1>
+            </div>
+
+            <div class="checkout-content">
+                <form id="checkout-form" class="checkout-form">
+                    <!-- Informations Personnelles -->
+                    <div class="form-section">
+                        <h2>Informations Personnelles</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Nom Complet *</label>
+                                <input type="text" id="client-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Téléphone *</label>
+                                <input type="tel" id="client-phone" required>
+                            </div>
+                            <div class="form-group full">
+                                <label>Email</label>
+                                <input type="email" id="client-email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Adresse de Livraison -->
+                    <div class="form-section">
+                        <h2>Adresse de Livraison</h2>
+                        <div class="form-grid">
+                            <div class="form-group full">
+                                <label>Wilaya *</label>
+                                <select id="wilaya" required>
+                                    <option value="">Sélectionnez votre Wilaya</option>
+                                    <option value="Adrar">01 - Adrar</option>
+                                    <option value="Chlef">02 - Chlef</option>
+                                    <option value="Laghouat">03 - Laghouat</option>
+                                    <option value="Oum El Bouaghi">04 - Oum El Bouaghi</option>
+                                    <option value="Batna">05 - Batna</option>
+                                    <option value="Béjaïa">06 - Béjaïa</option>
+                                    <option value="Biskra">07 - Biskra</option>
+                                    <option value="Béchar">08 - Béchar</option>
+                                    <option value="Blida">09 - Blida</option>
+                                    <option value="Bouira">10 - Bouira</option>
+                                    <option value="Tamanrasset">11 - Tamanrasset</option>
+                                    <option value="Tébessa">12 - Tébessa</option>
+                                    <option value="Tlemcen">13 - Tlemcen</option>
+                                    <option value="Tiaret">14 - Tiaret</option>
+                                    <option value="Tizi Ouzou">15 - Tizi Ouzou</option>
+                                    <option value="Alger">16 - Alger</option>
+                                    <option value="Djelfa">17 - Djelfa</option>
+                                    <option value="Jijel">18 - Jijel</option>
+                                    <option value="Sétif">19 - Sétif</option>
+                                    <option value="Saïda">20 - Saïda</option>
+                                    <option value="Skikda">21 - Skikda</option>
+                                    <option value="Sidi Bel Abbès">22 - Sidi Bel Abbès</option>
+                                    <option value="Annaba">23 - Annaba</option>
+                                    <option value="Guelma">24 - Guelma</option>
+                                    <option value="Constantine">25 - Constantine</option>
+                                    <option value="Médéa">26 - Médéa</option>
+                                    <option value="Mostaganem">27 - Mostaganem</option>
+                                    <option value="M'Sila">28 - M'Sila</option>
+                                    <option value="Mascara">29 - Mascara</option>
+                                    <option value="Ouargla">30 - Ouargla</option>
+                                    <option value="Oran">31 - Oran</option>
+                                    <option value="El Bayadh">32 - El Bayadh</option>
+                                    <option value="Illizi">33 - Illizi</option>
+                                    <option value="Bordj Bou Arréridj">34 - Bordj Bou Arréridj</option>
+                                    <option value="Boumerdès">35 - Boumerdès</option>
+                                    <option value="El Tarf">36 - El Tarf</option>
+                                    <option value="Tindouf">37 - Tindouf</option>
+                                    <option value="Tissemsilt">38 - Tissemsilt</option>
+                                    <option value="El Oued">39 - El Oued</option>
+                                    <option value="Khenchela">40 - Khenchela</option>
+                                    <option value="Souk Ahras">41 - Souk Ahras</option>
+                                    <option value="Tipaza">42 - Tipaza</option>
+                                    <option value="Mila">43 - Mila</option>
+                                    <option value="Aïn Defla">44 - Aïn Defla</option>
+                                    <option value="Naâma">45 - Naâma</option>
+                                    <option value="Aïn Témouchent">46 - Aïn Témouchent</option>
+                                    <option value="Ghardaïa">47 - Ghardaïa</option>
+                                    <option value="Relizane">48 - Relizane</option>
+                                    <option value="Timimoun">49 - Timimoun</option>
+                                    <option value="Bordj Badji Mokhtar">50 - Bordj Badji Mokhtar</option>
+                                    <option value="Ouled Djellal">51 - Ouled Djellal</option>
+                                    <option value="Béni Abbès">52 - Béni Abbès</option>
+                                    <option value="In Salah">53 - In Salah</option>
+                                    <option value="In Guezzam">54 - In Guezzam</option>
+                                    <option value="Touggourt">55 - Touggourt</option>
+                                    <option value="Djanet">56 - Djanet</option>
+                                    <option value="El M'Ghair">57 - El M'Ghair</option>
+                                    <option value="El Meniaa">58 - El Meniaa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Commune *</label>
+                                <input type="text" id="commune" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Code Postal</label>
+                                <input type="text" id="postal-code">
+                            </div>
+                            <div class="form-group full">
+                                <label>Adresse Complète *</label>
+                                <input type="text" id="address" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Type de Livraison -->
+                    <div class="form-section">
+                        <h2>Type de Livraison</h2>
+                        <div class="form-grid full">
+                            <div class="radio-group">
+                                <input type="radio" id="delivery-home" name="delivery-type" value="Domicile" checked>
+                                <label for="delivery-home" style="margin-bottom: 0;">Livraison à domicile</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="delivery-bureau" name="delivery-type" value="Bureau">
+                                <label for="delivery-bureau" style="margin-bottom: 0;">Livraison au bureau/point relais</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Méthode de Paiement -->
+                    <div class="form-section">
+                        <h2>Méthode de Paiement</h2>
+                        <div class="form-grid full">
+                            <div class="radio-group">
+                                <input type="radio" id="payment-cash" name="payment" value="Paiement à la Livraison" checked>
+                                <label for="payment-cash" style="margin-bottom: 0;">Paiement à la Livraison</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="payment-ccp" name="payment" value="Versement CCP">
+                                <label for="payment-ccp" style="margin-bottom: 0;">Versement CCP</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="payment-edahabia" name="payment" value="Edahabia">
+                                <label for="payment-edahabia" style="margin-bottom: 0;">Edahabia</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Notes Supplémentaires -->
+                    <div class="form-section">
+                        <h2>Notes Supplémentaires</h2>
+                        <div class="form-grid full">
+                            <div class="form-group">
+                                <label>Message (optionnel)</label>
+                                <textarea id="notes" rows="3" placeholder="Ajoutez vos remarques ici..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Confirmer la Commande</button>
+                </form>
+
+                <!-- Résumé de la Commande -->
+                <div class="order-summary">
+                    <h2>Résumé de la Commande</h2>
+                    <div id="order-items"></div>
+                    <div class="summary-box">
+                        <p style="margin: 0;">Total de votre commande : <span class="total-text"><span id="final-total">0</span> DA</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-main-content">
+            <h3>Amina Collection</h3>
+            <p>Rejoignez notre communauté sur les réseaux sociaux pour ne rien rater de nos nouveautés.</p>
+            
+            <div class="social-networks-container">
+                <a href="" target="_blank" class="social-btn">Instagram</a>
+                <a href="" target="_blank" class="social-btn">TikTok</a>
+                <a href="" target="_blank" class="social-btn">Facebook</a>
+            </div>
+        </div>
+        
+        <div class="footer-copyrights-bar">
+            <p>&copy; 2026 Amina Collection. Tous droits réservés. Conçu et développé par <strong>Chiraz Senni</strong>.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://aminacollection-api.onrender.com';
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        function renderOrderSummary() {
+            const container = document.getElementById('order-items');
+            
+            if (cart.length === 0) {
+                container.innerHTML = "<p style='text-align:center;'>Votre panier est vide</p>";
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="summary-item">
+                    <picture>
+                        <source srcset="${item.image.replace(/\.(jpg|jpeg|png)$/i, '.webp')}" type="image/webp">
+                        <img src="${item.image}" alt="${item.name}" class="summary-item-image" loading="lazy">
+                    </picture>
+                    <div class="summary-item-details">
+                        <strong>${item.name}</strong>
+                        <p>Taille: ${item.size} | Couleur: ${item.color}</p>
+                        <p>Qty: ${item.qty} × ${item.price} DA</p>
+                    </div>
+                    <div style="text-align: right; font-weight: 600;">
+                        ${(item.price * item.qty).toLocaleString()} DA
+                    </div>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('final-total').textContent = total.toLocaleString();
+        }
+
+        document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            const deliveryType = document.querySelector('input[name="delivery-type"]:checked').value;
+
+            const order = {
+                clientName: document.getElementById('client-name').value,
+                clientPhone: document.getElementById('client-phone').value,
+                email: document.getElementById('client-email').value,
+                wilaya: document.getElementById('wilaya').value,
+                commune: document.getElementById('commune').value,
+                postalCode: document.getElementById('postal-code').value,
+                address: document.getElementById('address').value,
+                deliveryType: deliveryType,
+                paymentMethod: paymentMethod,
+                notes: document.getElementById('notes').value,
+                items: cart,
+                totalPrice: cart.reduce((sum, item) => sum + (item.price * item.qty), 0),
+                status: "En cours"
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/orders`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(order)
+                });
+
+                if (res.ok) {
+                    alert("Merci ! Votre commande est bien enregistrée.");
+                    localStorage.removeItem('cart');
+                    window.location.href = "index.html";
+                } else {
+                    const error = await res.json();
+                    alert('Erreur: ' + (error.message || 'Impossible de créer la commande'));
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                alert('Erreur réseau: ' + error.message);
+            }
+        });
+
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        renderOrderSummary();
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Amina Collection | Boutique de Mode En Ligne</title>
+    <meta name="description" content="Bienvenue chez Amina Collection, votre destination exclusive pour l'élégance et le confort. Découvrez nos collections de Abayas, Robes et Ensembles de haute qualité.">
+    <meta name="keywords" content="amina collection, mode femme, abaya, robe, ensemble, boutique en ligne, chic, élégance, Algérie">
+    <meta name="author" content="amina collection">
+    
+    <meta property="og:title" content="Amina Collection | Boutique de Mode En Ligne">
+    <meta property="og:description" content="Découvrez nos collections exclusives de Abayas, Robes et Ensembles.">
+    <meta property="og:type" content="website">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Amina Collection Logo" style="height: 50px;">
+        </div>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="#best-sellers" onclick="closeMenu()">BEST SELLERS</a>
+            <a href="#categories" onclick="closeMenu()">CATÉGORIES</a>
+            <a href="#contact" onclick="closeMenu()">CONTACT</a>
+            <a href="cart.html" style="font-weight:bold; color: #F8A8C8;">PANIER</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION (Responsive Images) -->
+        <section class="hero-section">
+            <picture>
+                <source media="(max-width: 768px)" srcset="heromob.png">
+                <img src="hero.png" alt="Amina Collection Hero" class="hero-image">
+            </picture>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1>Amina Collection</h1>
+                <p>Où le confort rencontre l'élégance</p>
+                <a href="#best-sellers" class="hero-btn">Découvrir</a>
+            </div>
+        </section>
+
+        <!-- BEST SELLERS SECTION -->
+        <section class="best-sellers-section" id="best-sellers">
+            <div class="container-title">
+                <h2>Best Sellers</h2>
+            </div>
+            <div class="products-grid" id="best-sellers-list"></div>
+        </section>
+
+        <!-- CATEGORIES SECTION -->
+        <section class="categories-section" id="categories">
+            <div class="container-title">
+                <h2>Découvrir par Catégorie</h2>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('Abayas')">
+                    <img src="abaya.jpg" alt="Abayas" loading="lazy">
+                    <div class="category-overlay">
+                        <h3>Abayas</h3>
+                        <p>Découvrir</p>
+                    </div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Robes')">
+                    <img src="robee.jpg" alt="Robes" loading="lazy">
+                    <div class="category-overlay">
+                        <h3>Robes</h3>
+                        <p>Découvrir</p>
+                    </div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Ensembles')">
+                    <img src="ensemble.jpg" alt="Ensembles" loading="lazy">
+                    <div class="category-overlay">
+                        <h3>Ensembles</h3>
+                        <p>Découvrir</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTS SECTION (Dynamique) -->
+        <section class="products-section" id="products-section" style="display: none;">
+            <div class="container-title">
+                <h2 id="products-title">Produits</h2>
+                <button class="back-btn" onclick="goBack()">← Retour</button>
+            </div>
+            <div class="products-grid" id="products-list"></div>
+        </section>
+
+        <!-- OUR STORY SECTION -->
+        <section class="our-story-section">
+            <div class="story-container">
+                <div class="story-image">
+                    <img src="amina.png" alt="Amina Collection" loading="lazy">
+                </div>
+                
+                <div class="story-content">
+                    <h2>Notre Histoire</h2>
+                    <p>
+                        Amina Collection est née de la passion pour l'élégance et le confort. 
+                        Chaque pièce est sélectionnée avec soin pour vous offrir le meilleur 
+                        de la mode féminine. Nous croyons que toute femme mérite de se sentir 
+                        belle, confiante et à l'aise dans ses vêtements.
+                    </p>
+                    <p>
+                        Depuis notre lancement, nous nous engageons à fournir des produits 
+                        de qualité exceptionnelle et un service client sans pareil.
+                    </p>
+                    
+                    <div class="story-stats">
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Clients Satisfaits</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>1000+</h3>
+                            <p>Produits</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>100%</h3>
+                            <p>Qualité Garantie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-main-content">
+            <h3>Amina Collection</h3>
+            <p>Rejoignez notre communauté sur les réseaux sociaux pour ne rien rater de nos nouveautés.</p>
+            
+            <div class="social-networks-container">
+                <a href="https://www.instagram.com/amina___collection?igsh=czNmemFtaXcxc2lq" target="_blank" class="social-btn">Instagram</a>
+                <a href="https://www.tiktok.com/@amina____collection?_r=1&_t=ZS-97eM255R6RM" target="_blank" class="social-btn">TikTok</a>
+                <a href="https://www.facebook.com/share/18RbYAiwg7/?mibextid=wwXIfr" target="_blank" class="social-btn">Facebook</a>
+            </div>
+        </div>
+        
+        <div class="footer-copyrights-bar">
+            <p>&copy; 2026 Amina Collection. Tous droits réservés. Conçu et développé par <strong>Chiraz Senni</strong>.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL ='https://aminacollection-api.onrender.com' ;
+    
+        let allProducts = [];
+
+        async function loadProducts() {
+            try {
+                const res = await fetch(`${API_URL}/products`);
+                if (!res.ok) throw new Error('Failed to load products');
+                
+                allProducts = await res.json();
+                console.log('Produits chargés:', allProducts.length);
+                
+                // Afficher les Best Sellers
+                const bestSellers = allProducts.filter(p => p.isBestSeller === true);
+                displayBestSellers(bestSellers);
+            } catch (error) {
+                console.error('Erreur lors du chargement des produits:', error);
+            }
+        }
+
+        function displayBestSellers(productsToDisplay) {
+            const container = document.getElementById('best-sellers-list');
+            
+            if (productsToDisplay.length === 0) {
+                container.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>Aucun best seller disponible.</p>";
+                return;
+            }
+
+            container.innerHTML = productsToDisplay.map(p => createProductHTML(p)).join('');
+        }
+
+        function createProductHTML(p) {
+            const hasDiscount = p.discountPercentage > 0;
+            const displayPrice = p.discountPercentage ? Math.round(p.price * (1 - p.discountPercentage / 100)) : p.price;
+            
+            return `
+                <div class="product-card">
+                    ${p.isSoldOut ? '<div class="sold-out-badge">SOLD OUT</div>' : ''}
+                    ${hasDiscount ? `<div class="discount-badge">-${p.discountPercentage}%</div>` : ''}
+                    
+                    <div class="product-img-box" onclick="goToProduct('${p._id}')" style="cursor:pointer;">
+                        <picture>
+                            <source srcset="${p.image.replace(/\.(jpg|jpeg|png)$/i, '.webp')}" type="image/webp">
+                            <img src="${p.image}" alt="${p.name}" loading="lazy">
+                        </picture>
+                    </div>
+                    
+                    <div class="product-details">
+                        <h3 onclick="goToProduct('${p._id}')" style="cursor:pointer;">${p.name}</h3>
+                        <div class="price-section">
+                            ${hasDiscount ? `<span class="original-price">${p.price} DA</span>` : ''}
+                            <span class="price">${displayPrice} DA</span>
+                        </div>
+                        <button class="btn" onclick="addToCart('${p._id}')" ${p.isSoldOut ? 'disabled' : ''}>
+                            ${p.isSoldOut ? 'Indisponible' : 'Ajouter'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterByCategory(category) {
+            const filtered = allProducts.filter(p => p.category === category);
+            displayProductsByCategory(filtered, category);
+        }
+
+        function displayProductsByCategory(productsToDisplay, categoryName) {
+            const grid = document.getElementById('products-list');
+            const section = document.getElementById('products-section');
+            const title = document.getElementById('products-title');
+
+            title.textContent = categoryName;
+
+            if (productsToDisplay.length === 0) {
+                grid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>Aucun produit dans cette catégorie.</p>";
+            } else {
+                grid.innerHTML = productsToDisplay.map(p => createProductHTML(p)).join('');
+            }
+
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function goBack() {
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('products-list').innerHTML = '';
+        }
+
+        function goToProduct(id) {
+            window.location.href = `product.html?id=${id}`;
+        }
+
+        function addToCart(id) {
+            const product = allProducts.find(p => p._id == id);
+            
+            if (!product) {
+                alert("Produit non trouvé!");
+                return;
+            }
+
+            if (product.isSoldOut) {
+                alert("Ce produit est indisponible!");
+                return;
+            }
+            
+            window.location.href = `product.html?id=${id}`;
+        }
+
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        }
+
+        // Fermer le menu au clic sur le document
+        document.addEventListener('click', (e) => {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        loadProducts();
+    </script>
+</body>
+</html>

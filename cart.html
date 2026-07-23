@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Mon Panier | Amina Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .cart-container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .cart-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: #D4769F;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .cart-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details h3 {
+            color: #D4769F;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .cart-item-details p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 4px 0;
+        }
+
+        .cart-item-price {
+            text-align: right;
+        }
+
+        .item-total {
+            font-size: 1.3rem;
+            color: #F8A8C8;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .original-price-small {
+            font-size: 0.85rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-bottom: 5px;
+        }
+
+        .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c82333;
+        }
+
+        .cart-summary {
+            background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 100%);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(248, 168, 200, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #2C2C2C;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid #F8A8C8;
+            padding-top: 15px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #D4769F;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #F8A8C8 0%, #D4769F 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(248, 168, 200, 0.3);
+        }
+
+        .continue-shopping-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: #D4769F;
+            border: 2px solid #F8A8C8;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .continue-shopping-btn:hover {
+            background: #FFF5F8;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-cart h2 {
+            color: #D4769F;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .empty-cart p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .cart-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 15px;
+            }
+
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .cart-item-price {
+                grid-column: 1 / -1;
+                text-align: left;
+                border-top: 1px solid #eee;
+                padding-top: 10px;
+                margin-top: 10px;
+            }
+
+            .cart-summary {
+                position: relative;
+                top: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Amina Collection Logo" style="height: 50px;">
+        </div>
+
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="index.html" onclick="closeMenu()">HOME</a>
+            <a href="index.html#best-sellers" onclick="closeMenu()">BEST SELLERS</a>
+            <a href="index.html#categories" onclick="closeMenu()">CATÉGORIES</a>
+            <a href="index.html#contact" onclick="closeMenu()">CONTACT</a>
+            <a href="cart.html" style="font-weight:bold; color: #F8A8C8;">PANIER</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="cart-container">
+            <div class="cart-header">
+                <h1>🛒 Mon Panier</h1>
+            </div>
+
+            <div id="cart-empty" class="empty-cart" style="display:none;">
+                <h2>Votre panier est vide</h2>
+                <p>Découvrez nos collections et trouvez les articles qui vous plaisent</p>
+                <a href="index.html" class="continue-shopping-btn">Continuer vos achats</a>
+            </div>
+
+            <div id="cart-items-section" style="display:none;">
+                <div class="cart-content">
+                    <div class="cart-items" id="cart-items"></div>
+
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Sous-total</span>
+                            <span id="subtotal">0 DA</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Livraison</span>
+                            <span>À confirmer</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span id="total">0 DA</span>
+                        </div>
+                        <button class="checkout-btn" onclick="goToCheckout()">Passer la Commande</button>
+                        <a href="index.html" class="continue-shopping-btn" style="display:block; text-align:center; text-decoration:none; margin-top:10px;">Continuer vos achats</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-main-content">
+            <h3>Amina Collection</h3>
+            <p>Rejoignez notre communauté sur les réseaux sociaux pour ne rien rater de nos nouveautés.</p>
+            
+            <div class="social-networks-container">
+                <a href="" target="_blank" class="social-btn">Instagram</a>
+                <a href="" target="_blank" class="social-btn">TikTok</a>
+                <a href="" target="_blank" class="social-btn">Facebook</a>
+            </div>
+        </div>
+        
+        <div class="footer-copyrights-bar">
+            <p>&copy; 2026 Amina Collection. Tous droits réservés. Conçu et développé par <strong>Chiraz Senni</strong>.</p>
+        </div>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        function render() {
+            const emptyDiv = document.getElementById('cart-empty');
+            const itemsSection = document.getElementById('cart-items-section');
+            const itemsContainer = document.getElementById('cart-items');
+
+            if (cart.length === 0) {
+                emptyDiv.style.display = 'block';
+                itemsSection.style.display = 'none';
+                return;
+            }
+
+            emptyDiv.style.display = 'none';
+            itemsSection.style.display = 'block';
+
+            itemsContainer.innerHTML = cart.map((item, index) => {
+                const hasDiscount = item.discountPercentage > 0;
+                return `
+                    <div class="cart-item">
+                        <picture>
+                            <source srcset="${item.image.replace(/\.(jpg|jpeg|png)$/i, '.webp')}" type="image/webp">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image" loading="lazy">
+                        </picture>
+                        <div class="cart-item-details">
+                            <h3>${item.name}</h3>
+                            <p><strong>Taille:</strong> ${item.size || 'N/A'}</p>
+                            <p><strong>Couleur:</strong> ${item.color || 'N/A'}</p>
+                            <p><strong>Quantité:</strong> ${item.qty}</p>
+                        </div>
+                        <div class="cart-item-price">
+                            ${hasDiscount ? `<div class="original-price-small">${item.originalPrice} DA</div>` : ''}
+                            <div class="item-total">${(item.price * item.qty).toLocaleString()} DA</div>
+                            <button class="remove-btn" onclick="removeItem(${index})">Supprimer</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('subtotal').textContent = subtotal.toLocaleString() + ' DA';
+            document.getElementById('total').textContent = subtotal.toLocaleString() + ' DA';
+        }
+
+        function removeItem(index) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet article?')) {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                render();
+            }
+        }
+
+        function goToCheckout() {
+            window.location.href = 'checkout.html';
+        }
+
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            hamburger.classList.remove('active');
+            nav.classList.remove('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const hamburger = document.getElementById('hamburger');
+            const nav = document.getElementById('nav-links');
+            if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        render();
+    </script>
+</body>
+</html>

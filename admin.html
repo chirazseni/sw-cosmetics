@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration | Amina Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #D4769F;
+            border-bottom: 2px solid #F8A8C8;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        h3 {
+            color: #D4769F;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #F8A8C8;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #D4769F;
+            box-shadow: 0 0 0 3px rgba(248, 168, 200, 0.1);
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-save {
+            background: #D4769F;
+            color: white;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-save:hover {
+            background: #C06080;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 118, 159, 0.3);
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .btn-del {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-edit:hover, .btn-del:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background: #FFF5F8;
+            color: #D4769F;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #FFF5F8;
+        }
+
+        .img-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        #upload-status {
+            font-size: 14px;
+            color: #D4769F;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* Login Screen */
+        #login-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #FFF5F8 0%, #FFFFFF 100%);
+        }
+
+        #login-screen h2 {
+            border: none;
+            color: #D4769F;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        #login-screen input {
+            max-width: 300px;
+            margin-bottom: 15px;
+        }
+
+        #login-screen .btn-save {
+            max-width: 300px;
+        }
+
+        #login-error {
+            color: #dc3545;
+            margin-top: 15px;
+        }
+
+        #admin-content {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                padding: 10px;
+            }
+
+            td {
+                border: none;
+                padding: 6px 0;
+                text-align: right;
+            }
+
+            td:before {
+                font-weight: bold;
+                display: block;
+                color: #D4769F;
+                margin-bottom: 5px;
+            }
+
+            .btn-edit, .btn-del {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #2C2C2C;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .checkbox-label input {
+            width: auto;
+            margin-right: 10px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div id="login-screen">
+    <h2>🔒 Connexion Admin</h2>
+    <input type="password" id="admin-password" placeholder="Mot de passe" autocomplete="off">
+    <button class="btn btn-save" onclick="checkPassword()">Entrer</button>
+    <p id="login-error"></p>
+</div>
+
+<!-- Admin Content -->
+<div id="admin-content">
+<div class="container">
+    <h2 style="text-align:center; font-size:2rem; margin-bottom:30px;">🛠 Panneau d'Administration - Amina Collection</h2>
+
+    <!-- Add/Edit Product -->
+    <div class="card">
+        <h3>➕ Ajouter / Modifier un Produit</h3>
+        <form id="product-form" class="form-grid">
+            <input type="hidden" id="edit-id" value="">
+            
+            <div class="form-grid full">
+                <div>
+                    <label>Nom du Produit *</label>
+                    <input type="text" id="name" required>
+                </div>
+            </div>
+
+            <div>
+                <label>Prix (DA) *</label>
+                <input type="number" id="price" required>
+            </div>
+
+            <div>
+                <label>Pourcentage de Réduction (%)</label>
+                <input type="number" id="discount" value="0" min="0" max="100">
+            </div>
+
+            <div>
+                <label>Tailles (ex: S,M,L)</label>
+                <input type="text" id="sizes">
+            </div>
+
+            <div>
+                <label>Couleurs (ex: Noir,Beige)</label>
+                <input type="text" id="colors">
+            </div>
+
+            <div class="form-grid full">
+                <div>
+                    <label>Description Détaillée *</label>
+                    <textarea id="description" rows="4" required></textarea>
+                </div>
+            </div>
+
+            <div>
+                <label>Catégorie *</label>
+                <select id="product-category" required>
+                    <option value="">Sélectionnez</option>
+                    <option value="Abayas">Abayas</option>
+                    <option value="Robes">Robes</option>
+                    <option value="Ensembles">Ensembles</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Image Principale *</label>
+                <input type="file" id="main-image" accept="image/*">
+            </div>
+
+            <div class="form-grid full">
+                <div>
+                    <label>Galerie d'Images (plusieurs)</label>
+                    <input type="file" id="gallery-images" multiple accept="image/*">
+                </div>
+            </div>
+
+            <div class="checkbox-label">
+                <input type="checkbox" id="best">
+                <label style="margin: 0;">Ajouter aux Best Sellers</label>
+            </div>
+
+            <div class="checkbox-label">
+                <input type="checkbox" id="sold-out">
+                <label style="margin: 0;">Marquer comme Sold Out</label>
+            </div>
+
+            <div class="form-grid full">
+                <div id="upload-status"></div>
+            </div>
+
+            <button type="submit" class="btn btn-save full">Enregistrer le Produit</button>
+        </form>
+    </div>
+
+    <!-- Orders -->
+    <div class="card">
+        <h3>🚚 Commandes Reçues</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Téléphone</th>
+                    <th>Produits</th>
+                    <th>Total</th>
+                    <th>Wilaya</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody id="order-list"></tbody>
+        </table>
+    </div>
+
+    <!-- Products List -->
+    <div class="card">
+        <h3>📦 Liste des Produits</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Catégorie</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="product-list"></tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<script>
+    const API_URL = 'https://aminacollection-api.onrender.com';
+    const CLOUDINARY_CLOUD_NAME = 'dlpnfgyh4';
+    const CLOUDINARY_PRESET = 'aminacollection';
+    const ADMIN_PASSWORD = 'Aminaamina2026';
+
+    function checkPassword() {
+        const entered = document.getElementById('admin-password').value;
+        if (entered === ADMIN_PASSWORD) {
+            sessionStorage.setItem('isAdmin', 'true');
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('admin-content').style.display = 'block';
+            loadProducts();
+            loadOrders();
+        } else {
+            document.getElementById('login-error').innerText = '❌ Mot de passe incorrect';
+        }
+    }
+
+    if (sessionStorage.getItem('isAdmin') === 'true') {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-content').style.display = 'block';
+        loadProducts();
+        loadOrders();
+    }
+
+    let products = [];
+
+    async function loadProducts() {
+        try {
+            const res = await fetch(`${API_URL}/products`);
+            products = await res.json();
+            render();
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+    }
+
+    async function uploadToCloudinary(file) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_PRESET);
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+        });
+        const data = await res.json();
+
+        if (!data.secure_url) {
+            throw new Error('Upload échoué');
+        }
+
+        return data.secure_url;
+    }
+
+    document.getElementById('product-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const status = document.getElementById('upload-status');
+        const editId = document.getElementById('edit-id').value;
+        const mainImgFile = document.getElementById('main-image').files[0];
+        const galleryFiles = document.getElementById('gallery-images').files;
+
+        status.innerText = '⏳ Traitement...';
+
+        let mainImg = editId ? products.find(p => p._id === editId).image : '';
+        if (mainImgFile) {
+            mainImg = await uploadToCloudinary(mainImgFile);
+        }
+
+        let galleryImgs = editId ? products.find(p => p._id === editId).gallery || [] : [];
+        if (galleryFiles.length > 0) {
+            galleryImgs = [];
+            for (let f of galleryFiles) {
+                const url = await uploadToCloudinary(f);
+                galleryImgs.push(url);
+            }
+        }
+
+        const product = {
+            name: document.getElementById('name').value,
+            price: parseInt(document.getElementById('price').value),
+            discountPercentage: parseInt(document.getElementById('discount').value) || 0,
+            description: document.getElementById('description').value,
+            sizes: document.getElementById('sizes').value.split(',').map(s => s.trim()).filter(s => s),
+            colors: document.getElementById('colors').value.split(',').map(c => c.trim()).filter(c => c),
+            image: mainImg,
+            category: document.getElementById('product-category').value,
+            gallery: galleryImgs,
+            isBestSeller: document.getElementById('best').checked,
+            isSoldOut: document.getElementById('sold-out').checked
+        };
+
+        status.innerText = '💾 Enregistrement...';
+
+        try {
+            if (editId) {
+                await fetch(`${API_URL}/products/${editId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(product)
+                });
+            } else {
+                await fetch(`${API_URL}/products`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(product)
+                });
+            }
+
+            status.innerText = '✅ Produit enregistré!';
+            e.target.reset();
+            document.getElementById('edit-id').value = '';
+            document.getElementById('sold-out').checked = false;
+            loadProducts();
+        } catch (error) {
+            status.innerText = '❌ Erreur: ' + error.message;
+        }
+    });
+
+    function render() {
+        document.getElementById('product-list').innerHTML = products.map((p) => `
+            <tr>
+                <td data-label="Image"><img src="${p.image}" class="img-thumb"></td>
+                <td data-label="Nom">${p.name}</td>
+                <td data-label="Prix">${p.price} DA ${p.discountPercentage ? `(-${p.discountPercentage}%)` : ''}</td>
+                <td data-label="Catégorie">${p.category}</td>
+                <td data-label="Actions">
+                    <button class="btn btn-edit" onclick="edit('${p._id}')">Modifier</button>
+                    <button class="btn btn-del" onclick="del('${p._id}')">Supprimer</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function edit(id) {
+        const p = products.find(x => x._id === id);
+        document.getElementById('edit-id').value = id;
+        document.getElementById('name').value = p.name;
+        document.getElementById('price').value = p.price;
+        document.getElementById('discount').value = p.discountPercentage || 0;
+        document.getElementById('description').value = p.description;
+        document.getElementById('sizes').value = (p.sizes || []).join(', ');
+        document.getElementById('colors').value = (p.colors || []).join(', ');
+        document.getElementById('best').checked = p.isBestSeller || false;
+        document.getElementById('sold-out').checked = p.isSoldOut || false;
+        document.getElementById('product-category').value = p.category;
+        window.scrollTo(0, 0);
+    }
+
+    async function del(id) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce produit?')) {
+            try {
+                await fetch(`${API_URL}/products/${id}`, { method: 'DELETE' });
+                loadProducts();
+            } catch (error) {
+                alert('Erreur: ' + error.message);
+            }
+        }
+    }
+
+    async function loadOrders() {
+        try {
+            const res = await fetch(`${API_URL}/orders`);
+            const orders = await res.json();
+            document.getElementById('order-list').innerHTML = orders.map(o => `
+                <tr>
+                    <td data-label="Client">${o.clientName}</td>
+                    <td data-label="Téléphone">${o.clientPhone}</td>
+                    <td data-label="Produits">${o.items.map(i => i.name).join(', ')}</td>
+                    <td data-label="Total">${o.totalPrice} DA</td>
+                    <td data-label="Wilaya">${o.wilaya}</td>
+                    <td data-label="Statut">
+                        <select onchange="updateStatus('${o._id}', this.value)">
+                            <option value="En cours" ${o.status === 'En cours' ? 'selected' : ''}>En cours</option>
+                            <option value="Complet" ${o.status === 'Complet' ? 'selected' : ''}>Complet</option>
+                            <option value="Annulé" ${o.status === 'Annulé' ? 'selected' : ''}>Annulé</option>
+                        </select>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            console.error('Erreur:', error);
+        }
+    }
+
+    async function updateStatus(id, newStatus) {
+        try {
+            await fetch(`${API_URL}/orders/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus })
+            });
+            loadOrders();
+        } catch (error) {
+            alert('Erreur: ' + error.message);
+        }
+    }
+</script>
+
+</body>
+</html>
