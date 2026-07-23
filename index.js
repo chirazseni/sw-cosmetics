@@ -245,6 +245,6 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`\n🎉 Serveur  Collection lancé sur le port ${PORT}`);
-  console.log(`🌐 API: https://aminacollection-api.onrender.com`);
+  console.log(`🌐 API: https://sw-cosmetics.onrender.com`);
   console.log(`✅ Prêt à recevoir les requêtes!\n`);
 });

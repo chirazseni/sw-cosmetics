@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administration | Amina Collection</title>
+    <title>Administration | sw cosmetics</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -33,15 +33,15 @@
         }
 
         h2 {
-            color: #D4769F;
-            border-bottom: 2px solid #F8A8C8;
+            color: #8FBFAF;
+            border-bottom: 2px solid #8FBFAF;
             padding-bottom: 10px;
             margin-bottom: 20px;
             font-family: 'Playfair Display', serif;
         }
 
         h3 {
-            color: #D4769F;
+            color: #8FBFAF;
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
@@ -59,7 +59,7 @@
         input, textarea, select {
             width: 100%;
             padding: 12px;
-            border: 2px solid #F8A8C8;
+            border: 2px solid #8FBFAF;
             border-radius: 6px;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
@@ -69,7 +69,7 @@
 
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #D4769F;
+            border-color: #8FBFAF;
             box-shadow: 0 0 0 3px rgba(248, 168, 200, 0.1);
         }
 
@@ -84,14 +84,14 @@
         }
 
         .btn-save {
-            background: #D4769F;
+            background: #8FBFAF;
             color: white;
             width: 100%;
             margin-top: 20px;
         }
 
         .btn-save:hover {
-            background: #C06080;
+            background: #8FBFAF;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(212, 118, 159, 0.3);
         }
@@ -126,7 +126,7 @@
 
         th {
             background: #FFF5F8;
-            color: #D4769F;
+            color: #8FBFAF;
             font-weight: 600;
         }
 
@@ -143,7 +143,7 @@
 
         #upload-status {
             font-size: 14px;
-            color: #D4769F;
+            color: #8FBFAF;
             margin-top: 10px;
             font-weight: 600;
         }
@@ -160,7 +160,7 @@
 
         #login-screen h2 {
             border: none;
-            color: #D4769F;
+            color: #8FBFAF;
             font-size: 2rem;
             margin-bottom: 30px;
         }
@@ -217,7 +217,7 @@
             td:before {
                 font-weight: bold;
                 display: block;
-                color: #D4769F;
+                color: #8FBFAF;
                 margin-bottom: 5px;
             }
 
@@ -261,7 +261,7 @@
 <!-- Admin Content -->
 <div id="admin-content">
 <div class="container">
-    <h2 style="text-align:center; font-size:2rem; margin-bottom:30px;">🛠 Panneau d'Administration - Amina Collection</h2>
+    <h2 style="text-align:center; font-size:2rem; margin-bottom:30px;">🛠 Panneau d'Administration - sw cosmetics</h2>
 
     <!-- Add/Edit Product -->
     <div class="card">
@@ -286,30 +286,19 @@
                 <input type="number" id="discount" value="0" min="0" max="100">
             </div>
 
-            <div>
-                <label>Tailles (ex: S,M,L)</label>
-                <input type="text" id="sizes">
-            </div>
-
-            <div>
-                <label>Couleurs (ex: Noir,Beige)</label>
-                <input type="text" id="colors">
-            </div>
-
             <div class="form-grid full">
                 <div>
                     <label>Description Détaillée *</label>
                     <textarea id="description" rows="4" required></textarea>
                 </div>
             </div>
-
             <div>
                 <label>Catégorie *</label>
                 <select id="product-category" required>
                     <option value="">Sélectionnez</option>
-                    <option value="Abayas">Abayas</option>
-                    <option value="Robes">Robes</option>
-                    <option value="Ensembles">Ensembles</option>
+                    <option value="visage">visage</option>
+                    <option value="corp">corp</option>
+                    <option value="cheveux">cheveux</option>
                 </select>
             </div>
 
@@ -381,10 +370,10 @@
 </div>
 
 <script>
-    const API_URL = 'https://aminacollection-api.onrender.com';
+    const API_URL = 'https://sw-cosmetics.onrender.com';
     const CLOUDINARY_CLOUD_NAME = 'dlpnfgyh4';
     const CLOUDINARY_PRESET = 'aminacollection';
-    const ADMIN_PASSWORD = 'Aminaamina2026';
+    const ADMIN_PASSWORD = 'swcosmetics2026';
 
     function checkPassword() {
         const entered = document.getElementById('admin-password').value;
@@ -464,8 +453,6 @@
             price: parseInt(document.getElementById('price').value),
             discountPercentage: parseInt(document.getElementById('discount').value) || 0,
             description: document.getElementById('description').value,
-            sizes: document.getElementById('sizes').value.split(',').map(s => s.trim()).filter(s => s),
-            colors: document.getElementById('colors').value.split(',').map(c => c.trim()).filter(c => c),
             image: mainImg,
             category: document.getElementById('product-category').value,
             gallery: galleryImgs,
@@ -522,8 +509,6 @@
         document.getElementById('price').value = p.price;
         document.getElementById('discount').value = p.discountPercentage || 0;
         document.getElementById('description').value = p.description;
-        document.getElementById('sizes').value = (p.sizes || []).join(', ');
-        document.getElementById('colors').value = (p.colors || []).join(', ');
         document.getElementById('best').checked = p.isBestSeller || false;
         document.getElementById('sold-out').checked = p.isSoldOut || false;
         document.getElementById('product-category').value = p.category;

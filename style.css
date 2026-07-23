@@ -1,6 +1,6 @@
 /* =====================================================
-   AMINA COLLECTION - STYLE CSS GLOBAL
-   Color Palette: Soft Pink #F8A8C8, Dark Pink #D4769F
+   STYLE CSS GLOBAL
+   Color Palette: Beige #F5EFE3, Vert d'eau #8FBFAF
    ===================================================== */
 
 * {
@@ -10,15 +10,15 @@
 }
 
 :root {
-    --primary-pink: #F8A8C8;
-    --dark-pink: #D4769F;
+    --primary-green: #8FBFAF;
+    --dark-green: #5F9E8F;
     --gold: #D4AF37;
     --dark-text: #2C2C2C;
-    --light-bg: #FFF5F8;
+    --light-bg: #F5EFE3;
     --white: #FFFFFF;
     --gray-border: #e0e0e0;
     --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.08);
-    --shadow-medium: 0 10px 30px rgba(248, 168, 200, 0.2);
+    --shadow-medium: 0 10px 30px rgba(143, 191, 175, 0.2);
 }
 
 html {
@@ -84,7 +84,7 @@ header {
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--primary-pink);
+    background-color: var(--primary-green);
     transition: width 0.3s ease;
 }
 
@@ -94,7 +94,7 @@ header {
 }
 
 .nav-links a:hover {
-    color: var(--primary-pink);
+    color: var(--primary-green);
 }
 
 /* Hamburger Menu */
@@ -208,7 +208,7 @@ header {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(248, 168, 200, 0.4) 0%, rgba(212, 118, 159, 0.3) 100%);
+    background: linear-gradient(135deg, rgba(143, 191, 175, 0.4) 0%, rgba(95, 158, 143, 0.3) 100%);
     z-index: 2;
 }
 
@@ -241,21 +241,21 @@ header {
 .hero-btn {
     display: inline-block;
     padding: 12px 40px;
-    background-color: var(--primary-pink);
+    background-color: var(--primary-green);
     color: var(--white);
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
     transition: all 0.3s ease;
-    border: 2px solid var(--primary-pink);
+    border: 2px solid var(--primary-green);
     animation: slideUp 0.8s ease 0.4s both;
 }
 
 .hero-btn:hover {
-    background-color: var(--dark-pink);
-    border-color: var(--dark-pink);
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(248, 168, 200, 0.3);
+    box-shadow: 0 10px 25px rgba(143, 191, 175, 0.3);
 }
 
 @keyframes slideDown {
@@ -315,7 +315,7 @@ header {
 .best-sellers-section .container-title h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.8rem;
-    color: var(--dark-pink);
+    color: var(--dark-green);
     font-weight: 700;
     letter-spacing: 1.5px;
     position: relative;
@@ -368,7 +368,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(248, 168, 200, 0.7) 0%, rgba(212, 118, 159, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(143, 191, 175, 0.7) 0%, rgba(95, 158, 143, 0.6) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -433,7 +433,7 @@ header {
 .container-title h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.8rem;
-    color: var(--dark-pink);
+    color: var(--dark-green);
     font-weight: 700;
     letter-spacing: 1.5px;
     position: relative;
@@ -448,7 +448,7 @@ header {
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: linear-gradient(to right, var(--primary-pink), var(--dark-pink));
+    background: linear-gradient(to right, var(--primary-green), var(--dark-green));
     border-radius: 2px;
 }
 
@@ -457,7 +457,7 @@ header {
     right: 20px;
     top: 0;
     padding: 10px 20px;
-    background-color: var(--primary-pink);
+    background-color: var(--primary-green);
     color: var(--white);
     border: none;
     border-radius: 8px;
@@ -467,7 +467,7 @@ header {
 }
 
 .back-btn:hover {
-    background-color: var(--dark-pink);
+    background-color: var(--dark-green);
     transform: translateX(-5px);
 }
 
@@ -543,7 +543,7 @@ header {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--dark-pink) 100%);
+    background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
     color: white;
     padding: 8px 12px;
     border-radius: 6px;
@@ -570,7 +570,7 @@ header {
 }
 
 .product-card:hover .product-details h3 {
-    color: var(--primary-pink);
+    color: var(--primary-green);
 }
 
 .price-section {
@@ -579,7 +579,7 @@ header {
 
 .price {
     font-size: 1.3rem;
-    color: var(--primary-pink);
+    color: var(--dark-green);
     font-weight: 700;
 }
 
@@ -592,7 +592,7 @@ header {
 
 .btn {
     padding: 10px 20px;
-    background-color: var(--primary-pink);
+    background-color: var(--primary-green);
     color: var(--white);
     border: none;
     border-radius: 8px;
@@ -604,9 +604,9 @@ header {
 }
 
 .btn:hover {
-    background-color: var(--dark-pink);
+    background-color: var(--dark-green);
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(212, 118, 159, 0.3);
+    box-shadow: 0 5px 15px rgba(95, 158, 143, 0.3);
 }
 
 .btn:disabled {
@@ -667,7 +667,7 @@ header {
 .story-content h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    color: var(--dark-pink);
+    color: var(--dark-green);
     margin-bottom: 25px;
     letter-spacing: 1px;
     font-weight: 700;
@@ -687,7 +687,7 @@ header {
     gap: 30px;
     margin-top: 40px;
     padding-top: 40px;
-    border-top: 2px solid var(--primary-pink);
+    border-top: 2px solid var(--primary-green);
 }
 
 .stat-item {
@@ -701,7 +701,7 @@ header {
 
 .stat-item h3 {
     font-size: 2.5rem;
-    color: var(--primary-pink);
+    color: var(--dark-green);
     font-weight: 700;
     margin-bottom: 10px;
     font-family: 'Playfair Display', serif;
@@ -759,7 +759,7 @@ footer {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     margin-bottom: 15px;
-    color: var(--primary-pink);
+    color: var(--primary-green);
     font-weight: 700;
 }
 
@@ -779,21 +779,21 @@ footer {
 
 .social-btn {
     padding: 10px 25px;
-    background-color: var(--primary-pink);
+    background-color: var(--primary-green);
     color: var(--white);
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.9rem;
     transition: all 0.3s ease;
-    border: 2px solid var(--primary-pink);
+    border: 2px solid var(--primary-green);
     display: inline-block;
 }
 
 .social-btn:hover {
     background-color: transparent;
-    color: var(--primary-pink);
-    border-color: var(--primary-pink);
+    color: var(--primary-green);
+    border-color: var(--primary-green);
     transform: translateY(-3px);
 }
 
@@ -837,12 +837,12 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-pink);
+    background: var(--primary-green);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--dark-pink);
+    background: var(--dark-green);
 }
 
 /* =====================================================
