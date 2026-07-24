@@ -62,35 +62,32 @@
         </section>
 
         <!-- CATEGORIES SECTION -->
-        <section class="categories-section" id="categories">
-            <div class="container-title">
-                <h2>Découvrir par Catégorie</h2>
-            </div>
-            <div class="categories-grid">
-                <div class="category-card" onclick="filterByCategory('visage')">
-                    <img src="visage.jpg" alt="visage" loading="lazy">
-                    <div class="category-overlay">
-                        <h3>visage</h3>
-                        <p>Découvrir</p>
-                    </div>
-                </div>
-                <div class="category-card" onclick="filterByCategory('corp')">
-                    <img src="corp.jpg" alt="corp" loading="lazy">
-                    <div class="category-overlay">
-                        <h3>corp</h3>
-                        <p>Découvrir</p>
-                    </div>
-                </div>
-                <div class="category-card" onclick="filterByCategory('cheveux')">
-                    <img src="cheveux.jpg" alt="cheveux" loading="lazy">
-                    <div class="category-overlay">
-                        <h3>cheveux</h3>
-                        <p>Découvrir</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+       <div class="categories-grid">
+    <div class="category-card" onclick="filterByCategory('visage')">
+        <img src="visage.jpg" alt="visage" loading="lazy">
+        <div class="category-label">Visage</div>
+        <div class="category-overlay">
+            <h3>visage</h3>
+            <p>Découvrir</p>
+        </div>
+    </div>
+    <div class="category-card" onclick="filterByCategory('corp')">
+        <img src="corp.jpg" alt="corp" loading="lazy">
+        <div class="category-label">Corp</div>
+        <div class="category-overlay">
+            <h3>corp</h3>
+            <p>Découvrir</p>
+        </div>
+    </div>
+    <div class="category-card" onclick="filterByCategory('cheveux')">
+        <img src="cheveux.jpg" alt="cheveux" loading="lazy">
+        <div class="category-label">Cheveux</div>
+        <div class="category-overlay">
+            <h3>cheveux</h3>
+            <p>Découvrir</p>
+        </div>
+    </div>
+</div>
         <!-- PRODUCTS SECTION (Dynamique) -->
         <section class="products-section" id="products-section" style="display: none;">
             <div class="container-title">

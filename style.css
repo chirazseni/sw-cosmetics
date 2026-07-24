@@ -411,6 +411,21 @@ header {
     }
 }
 
+.category-label {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--dark-green, #5F9E8F);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: capitalize;
+    z-index: 5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* =====================================================
    PRODUCTS SECTIONS
    ===================================================== */
