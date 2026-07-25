@@ -34,15 +34,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'API is running ✅' });
 });
 
-// Admin login check
-app.post('/admin/login', (req, res) => {
-  const { password } = req.body;
-  if (password === process.env.ADMIN_PASSWORD) {
-    res.json({ success: true });
-  } else {
-    res.status(401).json({ success: false });
-  }
-});
 
 // ==================== MONGODB CONNECT ====================
 const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI;

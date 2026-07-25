@@ -370,20 +370,14 @@
 </div>
 
 <script>
-    const API_URL = 'https://sw-cosmetics.vercel.app';
+    const API_URL = 'https://sw-cosmetics.onrender.com';
     const CLOUDINARY_CLOUD_NAME = 'dlpnfgyh4';
     const CLOUDINARY_PRESET = 'aminacollection';
+    const ADMIN_PASSWORD = 'swcosmetics2026';
 
-async function checkPassword() {
-    const entered = document.getElementById('admin-password').value;
-    try {
-        const res = await fetch(`${API_URL}/admin/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password: entered })
-        });
-        const data = await res.json();
-        if (data.success) {
+   function checkPassword() {
+        const entered = document.getElementById('admin-password').value;
+        if (entered === ADMIN_PASSWORD) {
             sessionStorage.setItem('isAdmin', 'true');
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('admin-content').style.display = 'block';
@@ -392,10 +386,7 @@ async function checkPassword() {
         } else {
             document.getElementById('login-error').innerText = '❌ Mot de passe incorrect';
         }
-    } catch (error) {
-        document.getElementById('login-error').innerText = '❌ Erreur de connexion';
     }
-}
 
     if (sessionStorage.getItem('isAdmin') === 'true') {
         document.getElementById('login-screen').style.display = 'none';
